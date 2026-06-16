@@ -41,4 +41,4 @@ Have a skill to share? See our [Contributing Guide](../CONTRIBUTING.md) to submi
 
 ## Skill Requests
 
-Want a skill that doesn't exist? Open a [Discussion](https://github.com/superclawd-ai/superclawd/discussions) with the "Skill Request" category.
+Want a skill that doesn't exist? Open a [Discussion](https://github.com/superclawd-ai/superclawd/discussions) in the **Ideas** category.

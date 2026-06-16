@@ -37,4 +37,4 @@ Have a workflow to share? See our [Contributing Guide](../CONTRIBUTING.md) to su
 
 ## Workflow Requests
 
-Want a workflow that doesn't exist? Open a [Discussion](https://github.com/superclawd-ai/superclawd/discussions) with the "Workflow Request" category.
+Want a workflow that doesn't exist? Open a [Discussion](https://github.com/superclawd-ai/superclawd/discussions) in the **Ideas** category.

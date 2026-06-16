@@ -42,4 +42,4 @@ Have a command to share? See our [Contributing Guide](../CONTRIBUTING.md) to sub
 
 ## Command Requests
 
-Want a command that doesn't exist? Open a [Discussion](https://github.com/superclawd-ai/superclawd/discussions) with the "Command Request" category.
+Want a command that doesn't exist? Open a [Discussion](https://github.com/superclawd-ai/superclawd/discussions) in the **Ideas** category.
