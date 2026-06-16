@@ -8,7 +8,7 @@ SuperClawd is a CLI you run with `superclawd` that launches [Claude Code](https:
 
 ```bash
 npm install -g superclawd
-superclawd configure   # connect your workspace (one time)
+superclawd configure   # connect your account (one time)
 superclawd             # launch Claude Code, supercharged
 ```
 
