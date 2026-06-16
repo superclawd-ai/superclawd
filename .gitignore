@@ -1,0 +1,9 @@
+# Dependencies
+node_modules/
+
+# Package manager files (used for local testing only)
+package.json
+package-lock.json
+
+# OS files
+.DS_Store

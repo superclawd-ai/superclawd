@@ -1,0 +1,114 @@
+{
+  "name": "React Best Practices",
+  "action": "code",
+  "executionMode": "auto",
+  "description": "Guidelines for writing clean, maintainable React code following modern best practices",
+  "categories": [
+    {
+      "name": "Component Structure",
+      "description": "How to structure React components",
+      "instructions": [
+        {
+          "content": "Use functional components with hooks instead of class components",
+          "type": "direct"
+        },
+        {
+          "content": "Use named exports instead of default exports for better refactoring support",
+          "type": "direct"
+        },
+        {
+          "content": "Keep one component per file, with the file name matching the component name in PascalCase",
+          "type": "direct"
+        },
+        {
+          "content": "When creating a new component",
+          "type": "conditional",
+          "subInstructions": [
+            "Define a props interface named ComponentNameProps above the component",
+            "Destructure props in the function signature",
+            "Use React.ReactNode for children prop types"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Hooks",
+      "description": "React hooks best practices",
+      "instructions": [
+        {
+          "content": "Always include all dependencies in useEffect, useMemo, and useCallback dependency arrays",
+          "type": "direct"
+        },
+        {
+          "content": "Custom hooks must start with the 'use' prefix",
+          "type": "direct"
+        },
+        {
+          "content": "When creating a custom hook",
+          "type": "conditional",
+          "subInstructions": [
+            "Return an object with named properties for multiple values",
+            "Include loading and error states when the hook fetches data",
+            "Document the hook's purpose and return value"
+          ]
+        },
+        {
+          "content": "When using useEffect for data fetching",
+          "type": "conditional",
+          "subInstructions": [
+            "Consider using React Query or SWR instead for better caching",
+            "Include cleanup function to prevent memory leaks",
+            "Handle loading and error states"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "State Management",
+      "description": "Managing state in React applications",
+      "instructions": [
+        {
+          "content": "Keep state as close as possible to where it's used",
+          "type": "direct"
+        },
+        {
+          "content": "Use useState for simple local state, useReducer for complex state logic",
+          "type": "direct"
+        },
+        {
+          "content": "When state needs to be shared across components",
+          "type": "conditional",
+          "subInstructions": [
+            "Lift state up to the nearest common ancestor first",
+            "Use React Context for truly global state (theme, auth, locale)",
+            "Consider external state management only for complex apps"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Performance",
+      "description": "Optimizing React performance",
+      "instructions": [
+        {
+          "content": "When optimizing performance",
+          "type": "conditional",
+          "subInstructions": [
+            "Measure first with React DevTools Profiler before optimizing",
+            "Use React.memo only for components that render often with the same props",
+            "Use useMemo and useCallback sparingly - they have overhead too"
+          ]
+        },
+        {
+          "content": "When rendering lists",
+          "type": "conditional",
+          "subInstructions": [
+            "Always provide a stable, unique key prop",
+            "Never use array index as key if the list can be reordered",
+            "Consider virtualization for very long lists (react-window, react-virtualized)"
+          ]
+        }
+      ]
+    }
+  ]
+}

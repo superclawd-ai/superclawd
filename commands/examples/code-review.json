@@ -1,0 +1,12 @@
+{
+  "name": "code-review",
+  "description": "Perform a thorough code review with best practice recommendations",
+  "content": "Perform a thorough code review focusing on:\n\n## Code Quality\n- Readability and clarity\n- Consistent naming conventions\n- Proper code organization\n- DRY principle adherence\n- Single responsibility principle\n\n## Potential Issues\n- Bug risks and edge cases\n- Error handling completeness\n- Resource leaks (memory, connections, file handles)\n- Race conditions or concurrency issues\n- Performance bottlenecks\n\n## Best Practices\n- Testing coverage and quality\n- Documentation completeness\n- Logging appropriateness\n- Configuration management\n- Dependency management\n\nProvide actionable feedback with specific file locations and suggested improvements.",
+  "arguments": [
+    {
+      "name": "focus-area",
+      "description": "Specific area to focus the review on (e.g., performance, security)",
+      "required": false
+    }
+  ]
+}

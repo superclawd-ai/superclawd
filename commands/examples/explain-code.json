@@ -1,0 +1,12 @@
+{
+  "name": "explain-code",
+  "description": "Explain how a piece of code works in detail",
+  "content": "Explain this code in detail:\n\n## Overview\nProvide a high-level summary of what this code does and its purpose.\n\n## Step-by-Step Breakdown\nWalk through the code line by line or block by block, explaining:\n- What each section does\n- Why it's written this way\n- Any patterns or techniques used\n\n## Key Concepts\nHighlight and explain any:\n- Design patterns used\n- Language-specific features\n- Libraries or frameworks involved\n- Algorithms or data structures\n\n## Dependencies & Context\n- What this code depends on\n- Where this code fits in the larger system\n- How other parts of the codebase interact with it\n\nUse clear, beginner-friendly language while being technically accurate.",
+  "arguments": [
+    {
+      "name": "file-path",
+      "description": "Path to the file to explain",
+      "required": true
+    }
+  ]
+}

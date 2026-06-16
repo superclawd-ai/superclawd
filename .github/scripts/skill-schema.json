@@ -1,0 +1,106 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SuperClawd Skill",
+  "description": "Schema for SuperClawd community skill files",
+  "type": "object",
+  "required": ["name", "action", "executionMode", "description", "categories"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 40,
+      "description": "The skill name"
+    },
+    "action": {
+      "type": "string",
+      "enum": ["analyze", "plan", "design", "code", "test", "review", "debug", "commit", "deploy"],
+      "description": "The action type this skill applies to"
+    },
+    "executionMode": {
+      "type": "string",
+      "enum": ["auto", "always"],
+      "description": "When the skill should be executed"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100,
+      "description": "Brief description of the skill"
+    },
+    "categories": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 10,
+      "items": {
+        "$ref": "#/definitions/category"
+      },
+      "description": "Instruction categories"
+    }
+  },
+  "additionalProperties": false,
+  "definitions": {
+    "category": {
+      "type": "object",
+      "required": ["name", "instructions"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40,
+          "description": "Category name"
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "Category description"
+        },
+        "instructions": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 10,
+          "items": {
+            "$ref": "#/definitions/instruction"
+          },
+          "description": "Instructions in this category"
+        }
+      },
+      "additionalProperties": false
+    },
+    "instruction": {
+      "type": "object",
+      "required": ["content", "type"],
+      "properties": {
+        "content": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100,
+          "description": "The instruction content"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["direct", "conditional"],
+          "description": "Instruction type"
+        },
+        "subInstructions": {
+          "type": "array",
+          "maxItems": 8,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "description": "Sub-instructions for conditional type"
+        }
+      },
+      "additionalProperties": false,
+      "if": {
+        "properties": {
+          "type": { "const": "conditional" }
+        }
+      },
+      "then": {
+        "required": ["subInstructions"]
+      }
+    }
+  }
+}

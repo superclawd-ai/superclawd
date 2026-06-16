@@ -1,0 +1,62 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SuperClawd Command",
+  "description": "Schema for SuperClawd community command files",
+  "type": "object",
+  "required": ["name", "description", "content"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 30,
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "description": "The command name in kebab-case (e.g., 'security-review')"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100,
+      "description": "Brief description of what the command does"
+    },
+    "content": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 5000,
+      "description": "The command prompt content"
+    },
+    "arguments": {
+      "type": "array",
+      "maxItems": 3,
+      "items": {
+        "$ref": "#/definitions/argument"
+      },
+      "description": "Optional command arguments (max 3)"
+    }
+  },
+  "additionalProperties": false,
+  "definitions": {
+    "argument": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 30,
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+          "description": "Argument name in kebab-case"
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "Description of the argument"
+        },
+        "required": {
+          "type": "boolean",
+          "description": "Whether the argument is required"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

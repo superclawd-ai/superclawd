@@ -1,0 +1,96 @@
+{
+  "name": "TypeScript Strict Mode",
+  "action": "code",
+  "executionMode": "auto",
+  "description": "Strict TypeScript guidelines for type-safe, maintainable code",
+  "categories": [
+    {
+      "name": "Type Annotations",
+      "description": "Explicit typing rules",
+      "instructions": [
+        {
+          "content": "Always use explicit types for function parameters and return types",
+          "type": "direct"
+        },
+        {
+          "content": "Never use the 'any' type - use 'unknown' if the type is truly unknown",
+          "type": "direct"
+        },
+        {
+          "content": "Prefer interfaces for object shapes, types for unions and intersections",
+          "type": "direct"
+        },
+        {
+          "content": "When defining object types",
+          "type": "conditional",
+          "subInstructions": [
+            "Use interface for objects that may be extended",
+            "Use type for fixed shapes, unions, or computed types",
+            "Prefix interface names with 'I' only if it's a project convention"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Null Safety",
+      "description": "Handling null and undefined",
+      "instructions": [
+        {
+          "content": "Use optional chaining (?.) for potentially null/undefined values",
+          "type": "direct"
+        },
+        {
+          "content": "Use nullish coalescing (??) instead of || for default values",
+          "type": "direct"
+        },
+        {
+          "content": "Prefer undefined over null for optional values",
+          "type": "direct"
+        },
+        {
+          "content": "When a value can be null or undefined",
+          "type": "conditional",
+          "subInstructions": [
+            "Handle the null case explicitly with early returns or guards",
+            "Use type narrowing instead of non-null assertion (!)",
+            "Document why a value can be null in complex cases"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Generics",
+      "description": "Using generics effectively",
+      "instructions": [
+        {
+          "content": "When creating reusable utilities",
+          "type": "conditional",
+          "subInstructions": [
+            "Use generics to maintain type safety",
+            "Constrain generic parameters when possible (extends)",
+            "Use descriptive names for complex generics (TItem, TResult)"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Enums and Constants",
+      "description": "Defining constants and enums",
+      "instructions": [
+        {
+          "content": "Prefer const objects with 'as const' over enums for better tree-shaking",
+          "type": "direct"
+        },
+        {
+          "content": "When defining a set of related constants",
+          "type": "conditional",
+          "subInstructions": [
+            "Use 'as const' to get literal types",
+            "Create a union type from the const object values",
+            "Example: type Status = typeof STATUS[keyof typeof STATUS]"
+          ]
+        }
+      ]
+    }
+  ]
+}

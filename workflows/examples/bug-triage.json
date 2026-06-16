@@ -1,0 +1,55 @@
+{
+  "name": "Bug Triage Process",
+  "description": "Workflow for triaging and prioritizing bug reports",
+  "nodes": [
+    {
+      "type": "start",
+      "title": "Bug Reported",
+      "description": "A new bug report has been submitted",
+      "positionX": 250,
+      "positionY": 0
+    },
+    {
+      "type": "action",
+      "title": "Reproduce Bug",
+      "description": "Attempt to reproduce the reported issue",
+      "positionX": 250,
+      "positionY": 180
+    },
+    {
+      "type": "conditional",
+      "title": "Reproducible?",
+      "description": "Can the bug be reproduced?",
+      "positionX": 250,
+      "positionY": 360
+    },
+    {
+      "type": "end",
+      "title": "Close as Invalid",
+      "description": "Bug cannot be reproduced, closing ticket",
+      "positionX": 0,
+      "positionY": 540
+    },
+    {
+      "type": "action",
+      "title": "Prioritize & Assign",
+      "description": "Set priority and assign to developer",
+      "positionX": 500,
+      "positionY": 540
+    },
+    {
+      "type": "end",
+      "title": "Ready for Development",
+      "description": "Bug is triaged and ready for a developer to fix",
+      "positionX": 500,
+      "positionY": 720
+    }
+  ],
+  "edges": [
+    { "sourceNodeIndex": 0, "targetNodeIndex": 1 },
+    { "sourceNodeIndex": 1, "targetNodeIndex": 2 },
+    { "sourceNodeIndex": 2, "targetNodeIndex": 3, "label": "No" },
+    { "sourceNodeIndex": 2, "targetNodeIndex": 4, "label": "Yes" },
+    { "sourceNodeIndex": 4, "targetNodeIndex": 5 }
+  ]
+}

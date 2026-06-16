@@ -1,0 +1,5 @@
+{
+  "name": "security-review",
+  "description": "Perform a comprehensive security review of the codebase",
+  "content": "Perform a comprehensive security review of the code. Focus on:\n\n## OWASP Top 10\n- Injection vulnerabilities (SQL, NoSQL, OS command, LDAP)\n- Broken authentication and session management\n- Sensitive data exposure\n- XML External Entities (XXE)\n- Broken access control\n- Security misconfiguration\n- Cross-Site Scripting (XSS)\n- Insecure deserialization\n- Using components with known vulnerabilities\n- Insufficient logging and monitoring\n\n## Code-Specific Checks\n- Input validation and sanitization\n- Output encoding\n- Authentication mechanisms\n- Authorization checks\n- Cryptographic implementations\n- Error handling (no sensitive data in errors)\n- Secure communications (HTTPS, TLS)\n- Secrets management (no hardcoded credentials)\n\nProvide specific findings with file locations and recommended fixes."
+}
