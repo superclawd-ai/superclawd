@@ -21,19 +21,34 @@ A collection of ready-to-use skills for SuperClawd, created and maintained by th
 3. Drag and drop the file
 4. Done!
 
+## Skill Formats
+
+Skills come in two formats — both import the same way:
+
+- **Structured** — instructions organized into categories (the `categories` array).
+- **Markdown** — a single free-form markdown `body` (set `"format": "markdown"`).
+
+See the [Contributing Guide](../CONTRIBUTING.md#skill-json-format) for the full JSON format of each.
+
 ## Available Skills
 
 ### React
 
-| Skill | Description |
-|-------|-------------|
-| [react-best-practices.json](./examples/react-best-practices.json) | Component patterns, hooks, and React conventions |
+| Skill | Format | Description |
+|-------|--------|-------------|
+| [react-best-practices.json](./examples/react-best-practices.json) | Structured | Component patterns, hooks, and React conventions |
 
 ### TypeScript
 
-| Skill | Description |
-|-------|-------------|
-| [typescript-strict.json](./examples/typescript-strict.json) | Strict TypeScript guidelines for type-safe code |
+| Skill | Format | Description |
+|-------|--------|-------------|
+| [typescript-strict.json](./examples/typescript-strict.json) | Structured | Strict TypeScript guidelines for type-safe code |
+
+### Code Review
+
+| Skill | Format | Description |
+|-------|--------|-------------|
+| [code-review-checklist.json](./examples/code-review-checklist.json) | Markdown | A free-form checklist for thorough, consistent code reviews |
 
 ## Contributing
 

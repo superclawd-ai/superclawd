@@ -1,0 +1,8 @@
+{
+  "name": "Code Review Checklist",
+  "action": "review",
+  "executionMode": "auto",
+  "description": "A free-form markdown checklist for thorough, consistent code reviews",
+  "format": "markdown",
+  "body": "# Code Review Checklist\n\nApply this checklist when reviewing a pull request. Be specific and reference exact files and line numbers.\n\n## Correctness\n\n- Does the change do what the PR description says?\n- Are edge cases handled (empty input, nulls, large values, concurrency)?\n- Are error paths handled and surfaced, not swallowed?\n\n## Tests\n\n- Is new behavior covered by tests? Do the tests actually assert the behavior?\n- Do the tests fail without the change (no false-positive coverage)?\n\n## Readability\n\n- Do names describe intent? Is the control flow easy to follow?\n- Is the new code consistent with the surrounding style and conventions?\n\n## Security & Data\n\n- Is user input validated and escaped?\n- Are secrets, tokens, or PII kept out of logs and responses?\n\n## Performance\n\n- Any N+1 queries, unbounded loops, or needless allocations in hot paths?\n\n## Before approving\n\n- Leave actionable comments (what to change and why).\n- Approve only when correctness and tests are satisfied.\n"
+}

@@ -1,9 +1,9 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "SuperClawd Skill",
-  "description": "Schema for SuperClawd community skill files",
+  "description": "Schema for SuperClawd community skill files. A skill is authored in one of two formats: 'structured' (a tree of categories/instructions) or 'markdown' (a free-form markdown body).",
   "type": "object",
-  "required": ["name", "action", "executionMode", "description", "categories"],
+  "required": ["name", "action", "executionMode", "description"],
   "properties": {
     "name": {
       "type": "string",
@@ -13,7 +13,19 @@
     },
     "action": {
       "type": "string",
-      "enum": ["analyze", "plan", "design", "code", "test", "review", "debug", "commit", "deploy"],
+      "enum": [
+        "analyze",
+        "plan",
+        "design",
+        "code",
+        "test",
+        "review",
+        "debug",
+        "commit",
+        "deploy",
+        "write",
+        "behave"
+      ],
       "description": "The action type this skill applies to"
     },
     "executionMode": {
@@ -24,8 +36,13 @@
     "description": {
       "type": "string",
       "minLength": 1,
-      "maxLength": 100,
+      "maxLength": 250,
       "description": "Brief description of the skill"
+    },
+    "format": {
+      "type": "string",
+      "enum": ["structured", "markdown"],
+      "description": "Authoring format. Defaults to 'structured' when omitted (backward compatible)."
     },
     "categories": {
       "type": "array",
@@ -34,10 +51,44 @@
       "items": {
         "$ref": "#/definitions/category"
       },
-      "description": "Instruction categories"
+      "description": "Instruction categories (structured skills only)"
+    },
+    "body": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 12000,
+      "description": "Free-form markdown body (markdown skills only)"
+    },
+    "character_count": {
+      "type": "integer",
+      "description": "Optional precomputed character count for markdown skills (ignored on import)"
+    },
+    "token_count": {
+      "type": "integer",
+      "description": "Optional precomputed token count for markdown skills (ignored on import)"
     }
   },
   "additionalProperties": false,
+  "oneOf": [
+    {
+      "title": "Structured skill",
+      "description": "Has categories; format is 'structured' or omitted.",
+      "properties": {
+        "format": { "const": "structured" }
+      },
+      "required": ["categories"],
+      "not": { "required": ["body"] }
+    },
+    {
+      "title": "Markdown skill",
+      "description": "Has a markdown body; format must be 'markdown'.",
+      "properties": {
+        "format": { "const": "markdown" }
+      },
+      "required": ["format", "body"],
+      "not": { "required": ["categories"] }
+    }
+  ],
   "definitions": {
     "category": {
       "type": "object",

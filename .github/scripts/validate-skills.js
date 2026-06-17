@@ -100,12 +100,21 @@ function validateFile(filePath, readmeContent) {
   const schemaValid = validate(data);
 
   if (schemaValid) {
+    const format = data.format || 'structured';
     console.log(`  ✅ Valid schema`);
     console.log(`     Name: ${data.name}`);
     console.log(`     Action: ${data.action}`);
-    console.log(`     Categories: ${data.categories.length}`);
-    const instructionCount = data.categories.reduce((sum, cat) => sum + cat.instructions.length, 0);
-    console.log(`     Instructions: ${instructionCount}`);
+    console.log(`     Format: ${format}`);
+    if (format === 'markdown') {
+      console.log(`     Body: ${(data.body || '').length} chars`);
+    } else {
+      console.log(`     Categories: ${data.categories.length}`);
+      const instructionCount = data.categories.reduce(
+        (sum, cat) => sum + cat.instructions.length,
+        0
+      );
+      console.log(`     Instructions: ${instructionCount}`);
+    }
   } else {
     console.error(`  ❌ Schema validation errors:`);
     for (const error of validate.errors) {

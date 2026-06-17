@@ -65,7 +65,14 @@ Push your changes and open a PR to the main repository.
 
 ## Skill JSON Format
 
-Each skill file should follow this structure:
+A skill can be authored in one of two formats:
+
+- **Structured** — instructions organized into categories. Set `"format": "structured"` (or omit `format` entirely — it defaults to structured).
+- **Markdown** — a single free-form markdown `body`. Set `"format": "markdown"`.
+
+Both import the same way in SuperClawd. Pick whichever fits your skill.
+
+### Structured format
 
 ```json
 {
@@ -73,6 +80,7 @@ Each skill file should follow this structure:
   "action": "code",
   "executionMode": "auto",
   "description": "Guidelines for writing clean, maintainable React code",
+  "format": "structured",
   "categories": [
     {
       "name": "Component Structure",
@@ -97,15 +105,32 @@ Each skill file should follow this structure:
 }
 ```
 
+### Markdown format
+
+```json
+{
+  "name": "Code Review Checklist",
+  "action": "review",
+  "executionMode": "auto",
+  "description": "A free-form markdown checklist for thorough code reviews",
+  "format": "markdown",
+  "body": "# Code Review Checklist\n\n## Correctness\n- Does the change do what the PR says?\n- Are edge cases handled?\n\n## Tests\n- Is new behavior covered by tests?\n"
+}
+```
+
 ### Field Reference
 
 | Field | Required | Description |
 |-------|----------|-------------|
-| `name` | Yes | Skill name (1-100 characters) |
-| `action` | Yes | One of: `analyze`, `plan`, `design`, `code`, `test`, `review`, `debug`, `commit`, `deploy` |
+| `name` | Yes | Skill name (1-40 characters) |
+| `action` | Yes | One of: `analyze`, `plan`, `design`, `code`, `test`, `review`, `debug`, `commit`, `deploy`, `write`, `behave` |
 | `executionMode` | Yes | `auto` or `always` |
-| `description` | Yes | Brief description of the skill |
-| `categories` | Yes | Array of instruction categories |
+| `description` | Yes | Brief description of the skill (1-250 characters) |
+| `format` | No | `structured` (default) or `markdown` |
+| `categories` | Structured only | Array of instruction categories (1-10) |
+| `body` | Markdown only | Free-form markdown content (1-12,000 characters) |
+
+> A structured skill uses `categories` (and must not include `body`); a markdown skill uses `body` (and must not include `categories`).
 
 ### Category Fields
 
