@@ -8,9 +8,16 @@ SuperClawd is a CLI you run with `superclawd` that launches [Claude Code](https:
 
 ```bash
 npm install -g superclawd
-superclawd configure   # connect your account (one time)
-superclawd             # launch Claude Code, supercharged
+superclawd login          # sign in via your browser (one time)
+superclawd                # launch Claude Code, supercharged
 ```
+
+## Getting Started
+
+1. **Install the CLI:** `npm install -g superclawd`
+2. **Sign in:** Run `superclawd login`. This opens your browser to approve the machine — once approved, the CLI receives a per-machine credential automatically (no copy-paste needed). The approved machine appears under **Settings → Devices** in your workspace, where you can manage or revoke it anytime.
+3. **Pick a workspace:** Run `superclawd switch` to choose which workspace this machine uses.
+4. **Launch:** Run `superclawd` to start Claude Code with your team's skills, agents, commands, workflows, and directives loaded.
 
 ## Community Skills
 
