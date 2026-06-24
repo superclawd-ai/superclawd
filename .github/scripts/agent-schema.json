@@ -27,11 +27,6 @@
       "maxLength": 100,
       "description": "The model identifier (e.g. 'claude-opus-4-8')"
     },
-    "temperature": {
-      "type": ["number", "null"],
-      "minimum": 0,
-      "description": "Sampling temperature (optional, may be null)"
-    },
     "prompt": {
       "type": "string",
       "minLength": 1,
