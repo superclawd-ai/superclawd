@@ -266,7 +266,6 @@ Push your changes and open a PR. CI runs `validate-agents` against every agent J
 | `mode` | Yes | `subagent` or `primary` | — |
 | `prompt` | Yes | The agent system prompt | 1-50,000 chars |
 | `tools` | Yes | Per-tool permission map (`allow`, `deny`, `ask`) | — |
-| `temperature` | No | Sampling temperature (vendor/model dependent) | — |
 | `steps` | No | Max agent steps | 1-1000 |
 
 ## File Naming

@@ -28,7 +28,6 @@ An exported agent is identity + content only — no server-managed state (ids, c
 - **name** — kebab-case identifier, max 30 chars (auto-converted on import if needed)
 - **description** — optional summary, max 250 chars
 - **vendor** / **model** — the provider (e.g. `anthropic`) and model id
-- **temperature** — optional sampling temperature
 - **prompt** — the agent system prompt
 - **mode** — `subagent` or `primary`
 - **tools** — per-tool permissions (`allow` / `deny` / `ask`) for read, glob, grep, edit, write, bash, webfetch, task
