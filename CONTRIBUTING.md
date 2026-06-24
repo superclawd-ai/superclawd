@@ -1,10 +1,12 @@
 # Contributing to SuperClawd Community
 
-Thanks for contributing! This guide explains how to submit skills, commands, and workflows.
+Thanks for contributing! This guide explains how to submit skills, agents, commands, workflows, and guardrails.
 
 - [Contributing Skills](#contributing-skills)
+- [Contributing Agents](#contributing-agents)
 - [Contributing Commands](#contributing-commands)
 - [Contributing Workflows](#contributing-workflows)
+- [Contributing Guardrails](#contributing-guardrails)
 
 ---
 
@@ -205,6 +207,97 @@ Open a [Discussion](https://github.com/superclawd-ai/superclawd/discussions) if 
 
 ---
 
+# Contributing Agents
+
+This section explains how to submit agents for others to use.
+
+## How to Contribute Agents
+
+### 1. Fork this repository
+
+Click the "Fork" button at the top right of this page.
+
+### 2. Create your agent file
+
+Add your agent JSON file to `agents/examples/`:
+
+```
+agents/
+└── examples/
+    └── your-agent.json
+```
+
+### 3. Add to the catalog
+
+Update `agents/README.md` to include your agent in the **Available Agents** table.
+
+### 4. Submit a Pull Request
+
+Push your changes and open a PR. CI runs `validate-agents` against every agent JSON file — make sure yours passes.
+
+## Agent JSON Format
+
+```json
+{
+  "name": "code-reviewer",
+  "description": "Reviews pull requests for correctness and style",
+  "vendor": "anthropic",
+  "model": "claude-sonnet-4-5",
+  "mode": "subagent",
+  "prompt": "You are a meticulous code reviewer...",
+  "tools": {
+    "read": "allow",
+    "grep": "allow",
+    "edit": "deny",
+    "write": "deny",
+    "bash": "ask"
+  }
+}
+```
+
+### Field Reference
+
+| Field | Required | Description | Limits |
+|-------|----------|-------------|--------|
+| `name` | Yes | Agent name in kebab-case | 1-30 chars |
+| `description` | No | Brief description | Max 250 chars |
+| `vendor` | Yes | Model vendor (e.g., `anthropic`) | — |
+| `model` | Yes | Model identifier | 1-100 chars |
+| `mode` | Yes | `subagent` or `primary` | — |
+| `prompt` | Yes | The agent system prompt | 1-50,000 chars |
+| `tools` | Yes | Per-tool permission map (`allow`, `deny`, `ask`) | — |
+| `temperature` | No | Sampling temperature (vendor/model dependent) | — |
+| `steps` | No | Max agent steps | 1-1000 |
+
+## File Naming
+
+Use kebab-case for file names:
+- `code-reviewer.json`
+- `test-writer.json`
+
+**Important:** The file name should match the `name` field in the JSON.
+
+## Quality Guidelines
+
+Before submitting, ensure your agent:
+
+- [ ] Has a clear, descriptive name
+- [ ] Uses the correct JSON format
+- [ ] Has a focused, actionable prompt
+- [ ] Doesn't duplicate existing agents
+- [ ] Is tested by importing into SuperClawd
+- [ ] Is added to `agents/README.md` catalog
+- [ ] Passes the `validate-agents` CI check
+
+## Testing Your Agent
+
+1. Go to your SuperClawd workspace
+2. Navigate to Agents
+3. Click "Import" and upload your JSON file
+4. Verify the agent imported with the correct model, mode, and tool permissions
+
+---
+
 # Contributing Commands
 
 This section explains how to submit slash commands for others to use.
@@ -256,7 +349,7 @@ Push your changes and open a PR.
 |-------|----------|-------------|--------|
 | `name` | Yes | Command name in kebab-case | 1-30 chars |
 | `description` | Yes | Brief description | 1-100 chars |
-| `content` | Yes | The command prompt | 1-2000 chars |
+| `content` | Yes | The command prompt | 1-5000 chars |
 | `arguments` | No | Optional arguments | Max 3 |
 
 ### Argument Fields
@@ -287,6 +380,7 @@ Before submitting, ensure your command:
 - [ ] Is tested by importing into SuperClawd
 - [ ] Is added to `commands/README.md` catalog
 - [ ] Has a name and file name in kebab-case
+- [ ] Passes the `validate-commands` CI check
 
 ## Testing Your Command
 
@@ -370,6 +464,7 @@ Push your changes and open a PR.
 | `end` | Exit point of the workflow |
 | `action` | A step or task to perform |
 | `conditional` | A decision point with multiple paths |
+| `workflow` | A reference to another workflow (sub-workflow) |
 
 ### Edge Labels
 
@@ -390,3 +485,94 @@ Use kebab-case: `bug-fix.json`, `code-review.json`
 2. Navigate to Workflows
 3. Click "Import" and upload your JSON file
 4. Verify all nodes and edges imported correctly
+
+---
+
+# Contributing Guardrails
+
+This section explains how to submit guardrails for others to use. A guardrail is a rule that intercepts risky Claude Code tool calls before they run.
+
+## How to Contribute Guardrails
+
+### 1. Fork this repository
+
+Click the "Fork" button at the top right of this page.
+
+### 2. Create your guardrail file
+
+Add your guardrail JSON file to `guardrails/examples/`:
+
+```
+guardrails/
+└── examples/
+    └── your-guardrail.json
+```
+
+### 3. Add to the catalog
+
+Update `guardrails/README.md` to include your guardrail in the **Available Guardrails** table.
+
+### 4. Submit a Pull Request
+
+Push your changes and open a PR. CI runs `validate-guardrails` against every guardrail JSON file — make sure yours passes.
+
+## Guardrail JSON Format
+
+```json
+{
+  "name": "no-force-push",
+  "description": "Block force pushes to protected branches",
+  "match": {
+    "tools": ["Bash"],
+    "commandPatterns": ["git push.*--force", "git push.*-f"]
+  },
+  "action": "deny",
+  "message": "Force pushing is not allowed. Open a PR instead."
+}
+```
+
+### Field Reference
+
+| Field | Required | Description | Limits |
+|-------|----------|-------------|--------|
+| `name` | Yes | Guardrail name in kebab-case | 1-50 chars |
+| `description` | Yes | Brief description | 1-250 chars |
+| `match` | Yes | Conditions that trigger the rule | — |
+| `action` | Yes | One of: `deny`, `ask`, `warn` | — |
+| `message` | Yes | Message shown when the rule fires | 1-300 chars |
+
+### Match Fields
+
+| Field | Required | Description | Limits |
+|-------|----------|-------------|--------|
+| `tools` | Yes | Tool names this rule applies to (e.g., `Bash`, `Edit`) | 1-50 items |
+| `pathGlobs` | No | Glob patterns matched against file paths | Max 20 items, each 1-500 chars |
+| `commandPatterns` | No | Patterns matched against bash commands | Max 20 items, each 1-500 chars |
+| `contentPatterns` | No | Patterns matched against tool input content | Max 20 items, each 1-500 chars |
+
+## File Naming
+
+Use kebab-case for file names:
+- `no-force-push.json`
+- `block-secrets.json`
+
+**Important:** The file name should match the `name` field in the JSON.
+
+## Quality Guidelines
+
+Before submitting, ensure your guardrail:
+
+- [ ] Has a clear, descriptive name
+- [ ] Uses the correct JSON format
+- [ ] Targets a specific, real risk (not overly broad)
+- [ ] Doesn't duplicate existing guardrails
+- [ ] Is tested by importing into SuperClawd
+- [ ] Is added to `guardrails/README.md` catalog
+- [ ] Passes the `validate-guardrails` CI check
+
+## Testing Your Guardrail
+
+1. Go to your SuperClawd workspace
+2. Navigate to Guardrails
+3. Click "Import" and upload your JSON file
+4. Verify the rule triggers on the expected tool calls and the message displays correctly

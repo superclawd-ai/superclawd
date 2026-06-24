@@ -1,0 +1,79 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SuperClawd Agent",
+  "description": "Schema for SuperClawd community agent files. Mirrors the JSON export produced by the app (AgentExportData) and accepted by the agent import endpoint (POST /workspaces/:id/agents/import). Identity + content only — no server-managed state (ids, counts, enabled flags).",
+  "type": "object",
+  "required": ["name", "vendor", "model", "prompt", "mode", "tools"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 30,
+      "description": "The agent name (max 30 chars). On import a non-kebab name is auto-converted."
+    },
+    "description": {
+      "type": ["string", "null"],
+      "maxLength": 250,
+      "description": "Brief description of the agent (optional)"
+    },
+    "vendor": {
+      "type": "string",
+      "enum": ["anthropic"],
+      "description": "The model vendor"
+    },
+    "model": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100,
+      "description": "The model identifier (e.g. 'claude-opus-4-8')"
+    },
+    "temperature": {
+      "type": ["number", "null"],
+      "minimum": 0,
+      "description": "Sampling temperature (optional, may be null)"
+    },
+    "prompt": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 50000,
+      "description": "The agent system prompt"
+    },
+    "mode": {
+      "type": "string",
+      "enum": ["subagent", "primary"],
+      "description": "How the agent runs: as a delegated subagent or a primary agent"
+    },
+    "tools": {
+      "$ref": "#/definitions/tools"
+    },
+    "steps": {
+      "type": ["integer", "null"],
+      "minimum": 1,
+      "maximum": 1000,
+      "description": "Optional max step budget (1-1000, may be null)"
+    }
+  },
+  "additionalProperties": false,
+  "definitions": {
+    "toolPermission": {
+      "type": "string",
+      "enum": ["allow", "deny", "ask"],
+      "description": "Tool permission: allow, deny, or ask"
+    },
+    "tools": {
+      "type": "object",
+      "description": "Per-tool permissions. Each tool may be 'allow', 'deny', or 'ask'.",
+      "properties": {
+        "read": { "$ref": "#/definitions/toolPermission" },
+        "glob": { "$ref": "#/definitions/toolPermission" },
+        "grep": { "$ref": "#/definitions/toolPermission" },
+        "edit": { "$ref": "#/definitions/toolPermission" },
+        "write": { "$ref": "#/definitions/toolPermission" },
+        "bash": { "$ref": "#/definitions/toolPermission" },
+        "webfetch": { "$ref": "#/definitions/toolPermission" },
+        "task": { "$ref": "#/definitions/toolPermission" }
+      },
+      "additionalProperties": false
+    }
+  }
+}

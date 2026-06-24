@@ -4,7 +4,7 @@ Welcome to the official community space for [SuperClawd](https://superclawd.com)
 
 ## What is SuperClawd?
 
-SuperClawd is a CLI you run with `superclawd` that launches [Claude Code](https://claude.com/code) with your team's skills, agents, commands, workflows, and live directives already loaded as a plugin. Define your standards once in your workspace, and every Claude Code session follows them automatically.
+SuperClawd is a CLI you run with `superclawd` that launches [Claude Code](https://claude.com/code) with your team's skills, agents, commands, workflows, and live directives already loaded as a plugin. Your workspace's guardrails—rules that intercept risky tool calls before they run—are enforced in the same session too. Define your standards once in your workspace, and every Claude Code session follows them automatically.
 
 ```bash
 npm install -g superclawd
@@ -23,6 +23,10 @@ superclawd                # launch Claude Code, supercharged
 
 Browse and use skills created by the community! Check out the [`skills/`](./skills) directory for ready-to-import skill sets.
 
+## Community Agents
+
+Browse and use agents created by the community! Check out the [`agents/`](./agents) directory for ready-to-import agent definitions.
+
 ## Community Workflows
 
 Browse and use workflows created by the community! Check out the [`workflows/`](./workflows) directory for ready-to-import workflow templates.
@@ -31,7 +35,11 @@ Browse and use workflows created by the community! Check out the [`workflows/`](
 
 Browse and use slash commands created by the community! Check out the [`commands/`](./commands) directory for ready-to-import commands like `/security-review`, `/code-review`, and more.
 
-**Want to contribute?** See our [Contributing Guide](CONTRIBUTING.md) to submit your own skills, workflows, or commands.
+## Community Guardrails
+
+Browse and use guardrails created by the community! Check out the [`guardrails/`](./guardrails) directory for ready-to-import rules that intercept risky tool calls before they run.
+
+**Want to contribute?** See our [Contributing Guide](CONTRIBUTING.md) to submit your own skills, agents, commands, workflows, or guardrails.
 
 ### Featured Categories
 

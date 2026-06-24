@@ -1,0 +1,11 @@
+{
+  "name": "block-force-push",
+  "description": "Blocks force pushes to git so history is never rewritten on shared branches.",
+  "match": {
+    "tools": ["Bash"],
+    "commandPatterns": ["git\\s+push\\s+.*(--force|--force-with-lease|-f)\\b"]
+  },
+  "action": "deny",
+  "message": "Force pushing is blocked. Rewriting shared history can clobber other people's work — open a PR or coordinate with the team instead.",
+  "experimental": false
+}
