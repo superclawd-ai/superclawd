@@ -3,7 +3,7 @@
   "title": "SuperClawd Skill",
   "description": "Schema for SuperClawd community skill files. A skill is authored in one of two formats: 'structured' (a tree of categories/instructions) or 'markdown' (a free-form markdown body).",
   "type": "object",
-  "required": ["name", "action", "executionMode", "description"],
+  "required": ["name", "action"],
   "properties": {
     "name": {
       "type": "string",

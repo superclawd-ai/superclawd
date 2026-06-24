@@ -1,0 +1,11 @@
+{
+  "name": "protect-migrations",
+  "description": "Warns before editing already-applied database migration files, which should be append-only.",
+  "match": {
+    "tools": ["Edit", "Write"],
+    "pathGlobs": ["**/migrations/**", "**/db/migrate/**"]
+  },
+  "action": "warn",
+  "message": "Editing an existing migration can desync environments. Prefer adding a new migration instead of changing a committed one.",
+  "experimental": false
+}

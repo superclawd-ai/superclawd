@@ -13,7 +13,7 @@
     },
     "description": {
       "type": ["string", "null"],
-      "maxLength": 100,
+      "maxLength": 250,
       "description": "Brief description of the workflow"
     },
     "nodes": {
@@ -42,18 +42,18 @@
       "properties": {
         "type": {
           "type": "string",
-          "enum": ["start", "end", "action", "conditional"],
+          "enum": ["start", "end", "action", "conditional", "workflow"],
           "description": "Node type"
         },
         "title": {
           "type": "string",
           "minLength": 1,
-          "maxLength": 255,
+          "maxLength": 40,
           "description": "Node title"
         },
         "description": {
           "type": ["string", "null"],
-          "maxLength": 1000,
+          "maxLength": 250,
           "description": "Node description"
         },
         "positionX": {

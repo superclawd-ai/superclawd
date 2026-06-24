@@ -1,0 +1,87 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SuperClawd Guardrail",
+  "description": "Schema for SuperClawd community guardrail files. A guardrail is an enforced workspace rule that intercepts Claude Code tool calls via PreToolUse hooks. The shape mirrors the exported guardrail payload (identity + enforcement content only, no server-managed state).",
+  "type": "object",
+  "required": ["name", "description", "match", "action", "message"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 50,
+      "description": "The guardrail name (kebab-case recommended, e.g. \"block-force-push\")"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 250,
+      "description": "Brief description of what the guardrail enforces"
+    },
+    "match": {
+      "$ref": "#/definitions/match",
+      "description": "Conditions that determine which tool calls this guardrail intercepts"
+    },
+    "action": {
+      "type": "string",
+      "enum": ["deny", "ask", "warn"],
+      "description": "What to do when the guardrail matches: deny (block), ask (prompt the user), or warn (allow with a notice)"
+    },
+    "message": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 300,
+      "description": "Message shown to the user when the guardrail matches"
+    },
+    "presetId": {
+      "type": ["string", "null"],
+      "maxLength": 64,
+      "description": "Optional identifier of the preset this guardrail was derived from"
+    },
+    "experimental": {
+      "type": "boolean",
+      "description": "Whether the guardrail is in experimental mode"
+    }
+  },
+  "additionalProperties": false,
+  "definitions": {
+    "patternArray": {
+      "type": "array",
+      "maxItems": 20,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 500
+      }
+    },
+    "match": {
+      "type": "object",
+      "required": ["tools"],
+      "properties": {
+        "tools": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 50,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "description": "Tool names this guardrail applies to (e.g. \"Bash\", \"Edit\", \"Write\")"
+        },
+        "pathGlobs": {
+          "$ref": "#/definitions/patternArray",
+          "description": "Optional glob patterns matched against file paths"
+        },
+        "commandPatterns": {
+          "$ref": "#/definitions/patternArray",
+          "description": "Optional regex patterns matched against Bash commands"
+        },
+        "contentPatterns": {
+          "$ref": "#/definitions/patternArray",
+          "description": "Optional regex patterns matched against tool input content"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}
