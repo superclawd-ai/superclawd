@@ -16,6 +16,11 @@
       "maxLength": 250,
       "description": "Brief description of the workflow"
     },
+    "mode": {
+      "type": "string",
+      "enum": ["procedure", "reference"],
+      "description": "How the agent uses the workflow: 'procedure' (default) is an executable recipe the agent follows; 'reference' is a structured explainer the agent reads. Optional; defaults to 'procedure' on import when omitted."
+    },
     "nodes": {
       "type": "array",
       "minItems": 1,
@@ -42,7 +47,7 @@
       "properties": {
         "type": {
           "type": "string",
-          "enum": ["start", "end", "action", "conditional", "workflow"],
+          "enum": ["start", "end", "action", "conditional"],
           "description": "Node type"
         },
         "title": {
